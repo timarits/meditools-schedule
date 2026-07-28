@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "dose_times": ["07:00", "10:00", "13:00", "16:00", "19:00", "22:00"],
+  "no_eat_before_min": 60,
+  "no_eat_after_min": 30,
+  "night": { "start": "22:30", "end": "06:00" },
+  "alarm": { "max_minutes": 30, "hold_to_confirm_ms": 1500 },
+  "poll_interval_min": 5,
+  "language": "nl"
+}
