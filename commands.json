@@ -1,7 +1,7 @@
 {
-  "id": "2026-07-30-clear-dev-noise",
-  "clear_log": true,
-  "clear_state": true,
-  "resync_clock": true,
+  "id": "none",
+  "clear_log": false,
+  "clear_state": false,
+  "resync_clock": false,
   "reboot": false
 }
