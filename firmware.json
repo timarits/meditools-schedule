@@ -3,13 +3,13 @@
     "Figtree-Black.af": "de38eccb19fedcb06c92d939ee0f69144d6c4610533bb55c2d5793258fead5a6",
     "Figtree-ExtraBold.af": "76695b36b7b5149b6c2728ea5a473b1f2d6fe799e475bdc6eecaa6364a428e45",
     "Figtree-SemiBold.af": "f6b4b1e527bc61459f033e802619ec3805afcffc9053505c45d3faf517846b9b",
+    "app.py": "a960af602219fa733b5f0fb323db347549c221107ce8606a4317ca4e123a8c0e",
     "doselogic.py": "fcf2f8e6e3309eed13eaca4b76eb0f0036d573d33fef89974d73fe0c51ef711d",
     "identify_leds.py": "dadd8f3ecc5ee1ca8c608f16808a9623c3266f57b4601def0623e4ef200d0418",
     "logsync.py": "a150ddd67d1363e4b665300928e7d38d187bae5516cdfc9c6f84af63c159ee6e",
-    "main.py": "a960af602219fa733b5f0fb323db347549c221107ce8606a4317ca4e123a8c0e",
     "medschedule.py": "a25a25b0350a30fc9971346d6c26947a506a66584d277a8fbba621a6d806ff48",
     "netsync.py": "16553f1bfae6cc9661e06cbbe552b7ef161401c67c0b2145a1e655121ef8a7ac",
-    "ota.py": "edd2b5a6f23fa3e370e55a1f2462ff96b4a46cc7e649c2c74831f415c19d1304",
+    "ota.py": "995ce3f06f9eab660286fab2900b393cc6d9336770a203d3f7d5637961d677eb",
     "painter.py": "5b67e1923e5d10a3a4182dc5589a69fd05208fd9ed6b09288f9e41c663edd62a",
     "remote.py": "58fdd2e47fb945e7b9a94f33f606da33c8f3d36d02ff91bfa7cbedf1fdcea3ad",
     "selftest.py": "81698cc345c8ca3dc07cb7ec9d967a66cb441b4a7e8b8d31a6a3744361613319",
@@ -17,5 +17,5 @@
     "theme.py": "5e06a5e09be3650d82d5914554a8ae58a8fa9b3664bcf3cb0b8f5a4b22f7c6dc",
     "ui.py": "02a8e8cc84a18070efe38e3589cfdfcb8594988281cdabb7610dd4a0ef8f43d4"
   },
-  "version": 1
+  "version": 2
 }

@@ -12,27 +12,32 @@ the design is built around the update failing, not around it working:
   3. Move each live file to `<name>.bak`, then `<name>.new` into place, and
      write an `otapending.json` marker naming every file involved.
   4. Reset.
-  5. boot.py -- which is never itself updated -- sees the marker and counts
-     the attempt. main.py clears the marker once it has run healthily for a
+  5. main.py -- which is never itself updated -- sees the marker and counts
+     the attempt. app.py clears the marker once it has run healthily for a
      while. If the device reboots twice more without ever getting that far,
-     boot.py puts the .bak files back and reboots onto the old code.
+     main.py puts the .bak files back and reboots onto the old code.
 
 So the worst case for a broken push is a couple of minutes of reboot loop,
 then the device is back on the last version that worked, with the reason in
 errorlog.txt.
 
-`main.py` is deliberately updatable, `boot.py` deliberately is not: the
-recovery path cannot be allowed to depend on the thing being replaced.
+main.py is deliberately not updatable: it is both the launcher and the
+rollback, so it must not be something a bad update can replace. The
+application itself lives in app.py and is fully updatable.
+
+(The rollback started out in boot.py, the conventional place for it. It turned
+out the Presto firmware never executes boot.py -- so it silently did nothing.
+Hence main.py.)
 """
 
 VERSION_FILE = "otaversion.json"
 PENDING_FILE = "otapending.json"
 
-# Never replaced by an update: boot.py is the rollback path, secrets.py is
-# local configuration, schedule.json is the live config polled separately (a
-# release must not stamp on remote schedule edits), and the rest is this
-# device's own state rather than anything belonging to a release.
-PROTECTED = ("boot.py", "secrets.py", "schedule.json",
+# Never replaced by an update: main.py is the launcher and the rollback,
+# secrets.py is local configuration, schedule.json is the live config polled
+# separately (a release must not stamp on remote schedule edits), and the rest
+# is this device's own state rather than anything belonging to a release.
+PROTECTED = ("main.py", "secrets.py", "schedule.json",
              "otaversion.json", "otapending.json",
              "doselog.csv", "dosestate.json", "remotestate.json",
              "errorlog.txt")
@@ -190,7 +195,7 @@ def check_and_apply(manifest, base_url, feed=lambda: None, log=lambda m: None):
             return False
         staged.append(name)
 
-    # Swap in. From here a failure is recoverable by boot.py.
+    # Swap in. From here a failure is recoverable by the launcher.
     import os
     swapped = []
     for name in staged:
@@ -224,7 +229,7 @@ def commit():
 
 
 def rollback(log=lambda m: None):
-    """Put the .bak files back. Called by boot.py, never by the app."""
+    """Put the .bak files back. Called by the launcher, never by the app."""
     import os
     pending = _read_json(PENDING_FILE)
     if not pending:
@@ -248,7 +253,7 @@ def rollback(log=lambda m: None):
 def note_boot_attempt(limit=2):
     """Count one boot under a pending update. True if it is time to roll back.
 
-    boot.py calls this before the app starts, so a crash on import is counted
+    main.py calls this before the app starts, so a crash on import is counted
     just the same as a crash in the loop.
     """
     pending = _read_json(PENDING_FILE)
