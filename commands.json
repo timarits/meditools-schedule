@@ -1,0 +1,7 @@
+{
+  "id": "none",
+  "clear_log": false,
+  "clear_state": false,
+  "resync_clock": false,
+  "reboot": false
+}
